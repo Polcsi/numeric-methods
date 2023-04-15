@@ -1,37 +1,40 @@
-
-% Explicit Euler Method with MATLAB
-% Equation to solve: y'=t+y; y(0)=1; t=[0,1];
-
 clc, clear all, close all
 
-h=0.1;
-n=10;
-a=0;
-b=1;
-t0=0;
-y0=1;
-f = @(t,y) t+y;
-exact = @(t) -t - 1 + 2 * exp(t);
-
-t = a + h * (0:n - 1);
-y = zeros(1,length(t));
-y(1) = 1; % initial condition
+n = input("Enter iteration length: ");
+input_h = input("Enter step size: ");
+t0 = input("Enter t0 initial value: ");
+y0 = input("Enter y0 initial value: ");
+b = input("Enter end of interval value: ");
+a = t0;
+f = @(t, y) (2 * t) + y;
+exact = @(t) ((-2) * (t + 1) + (3 * exp(t)));
+if !isempty(input_h)
+  h = input_h;
+else
+  h=(b - a) / n;
+endif
+t=[a zeros(1, n)];
+y=[length(t)];
+y(1) = y0;
 
 fprintf('%7s %7s %7s \n','i','t(i)','y(i)');
-for i=1:n
- y(i+1) = y(i) + h * f(t(i), y(i));
- fprintf('%7d %7.2f %7.3f \n',i, t(i), y(i));
-end
+for i=1:1:n + 1
+  if i <= n
+     t(i + 1)=t(i) + h;
+  endif
+  if i != 1
+    y(i)=y(i - 1)+ h * f(t(i - 1),y(i - 1));
+  endif
+  fprintf('%7d %7.2f %7.3f \n',i, t(i), y(i));
+end;
 
-y(length(t))=[ ];
-
-plot(t, y,'b-o', t, exact(t), 'g')
-
-title('Euler-ODE---Numerical Solution---');
+plot(t, y, 'b-o', t, exact(t), 'g');
+title('Explicit Euler Method');
 ylabel('y'); xlabel('t');
 legend({'Approximate','Exact'},'Location','northwest');
-
 grid on
+
 hold on
 hold off
+
 
