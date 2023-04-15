@@ -7,8 +7,6 @@ let y0 = 1;
 let f = (t, y) => t + y;
 let t = new Array(n).fill(0);
 let y = new Array(n).fill(0);
-t[0] = t0;
-y[0] = y0;
 
 for (let i = 0; i < n; i++) {
   t[i] = t0 + h * (i + 1);

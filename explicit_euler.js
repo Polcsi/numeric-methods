@@ -1,14 +1,12 @@
-let n = 10;
-let a = 1;
-let b = 2;
+let n = 20;
+let a = 0;
+let b = 5;
 let h = (b - a) / (n - 1);
 let t0 = 0;
 let y0 = 1;
-let f = (t, y) => t + y;
+let f = (t, y) => -Math.pow(y, 2);
 let t = new Array(n).fill(0);
 let y = new Array(n).fill(0);
-t[0] = t0;
-y[0] = y0;
 
 for (let i = 0; i < n; i++) {
   t[i] = t0 + h * (i + 1);
