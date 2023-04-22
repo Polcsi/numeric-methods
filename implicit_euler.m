@@ -17,7 +17,6 @@ endif
 
 % Nemlineáris egyenletrendszer
 backward_euler = @ ( f, to, yo, tp, yp ) yp - yo - ( tp - to ) * ( f ( tp, yp ) )';
-tspan = [0.0 1];
 f = @(t, y) (2 * t) + y; % függvény meghatározása
 exact = @(t) ((-2) * (t + 1) + (3 * exp(t))); % függvény egzakt megoldása
 m = length ( y0 );
@@ -26,12 +25,12 @@ y = zeros ( n + 1, m ); % y tömb feltöltése nullákkal
 ye = zeros( n + 1, m); % ye(egzakt megoldáshoz) tömb feltöltése nullákkal
 
 % tömbök első elmeinek beállítása
-t(1,1) = tspan(1);
+t(1,1) = t0(:);
 y(1,:) = y0(:);
 ye(1,:) = y0(:);
 
 fprintf('%7s %7s %7s %7s \n','i','t(i)','y(i)', 'ye(i)'); % fejléc kiírása
-fprintf('%7d %7.2f %7.3f %7.3f \n', 1, tspan(1), y0, y0); % első iteráció kiírása
+fprintf('%7d %7.2f %7.3f %7.3f \n', 1, t0(:), y0, y0); % első iteráció kiírása
 for i = 1 : n
 
    to = t(i,1);
